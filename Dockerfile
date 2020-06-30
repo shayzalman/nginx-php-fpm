@@ -108,7 +108,7 @@ RUN openssl dhparam -out /etc/nginx/certs/dhparam.pem 2048
 
 RUN apt update && apt-get install -y openssh-server
 RUN echo 'root:123456' | chpasswd
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
@@ -130,8 +130,8 @@ ADD ./default.conf /etc/nginx/conf.d/default.conf
 # Add Scripts
 ADD ./start.sh /start.sh
 
-EXPOSE 22:2223
-EXPOSE 80:8083
-EXPOSE 443:4443
+EXPOSE 22
+EXPOSE 80
+EXPOSE 443
 
 CMD ["/start.sh"]
