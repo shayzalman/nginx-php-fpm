@@ -106,7 +106,7 @@ RUN mkdir -p /etc/nginx/certs/self-signed/
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/certs/self-signed/ssldocker.test.key -out /etc/nginx/certs/self-signed/ssldocker.test.crt -subj "/C=US/ST=Florida/L=Orlando/O=Development/OU=Dev/CN=ssldocker.test"
 RUN openssl dhparam -out /etc/nginx/certs/dhparam.pem 2048
 
-RUN apt-get install -y openssh-server
+RUN apt update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN echo 'root:123456' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
