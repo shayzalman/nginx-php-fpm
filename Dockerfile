@@ -53,6 +53,7 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
             php7.3-readline \
             php7.3-mbstring \
             php7.3-curl \
+            php7.3-soap \
             php7.3-gd \
             php7.3-mysql \
             php7.3-zip \
