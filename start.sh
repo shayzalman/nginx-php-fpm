@@ -7,7 +7,7 @@ sed -i -e "s/worker_processes  1/worker_processes $procs/" /etc/nginx/nginx.conf
 # Always chown webroot for better mounting
 chown -Rf nginx.nginx /usr/share/nginx/html
 
-service ssh start
-
 # Start supervisord and services
+service ssh start
+service php7.3-fpm start 
 /usr/local/bin/supervisord -n -c /etc/supervisord.conf

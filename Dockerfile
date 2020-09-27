@@ -62,6 +62,7 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
             php7.3-xml \
             php-pear \
     && pecl -d php_suffix=7.3 install -o -f redis memcached imagick \
+    && pecl install mongodb \
     && mkdir -p /run/php \
     && pip install wheel \
     && pip install supervisor supervisor-stdout \
@@ -83,6 +84,7 @@ RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
     && sed -i -e "s/^;clear_env = no$/clear_env = no/" ${fpm_conf} \
     && echo "extension=redis.so" > /etc/php/7.3/mods-available/redis.ini \
     && echo "extension=memcached.so" > /etc/php/7.3/mods-available/memcached.ini \
+    && echo "extension=mongodb.so" > /etc/php/7.3/mods-available/mongo.ini \
     && echo "extension=imagick.so" > /etc/php/7.3/mods-available/imagick.ini \
     && ln -sf /etc/php/7.3/mods-available/redis.ini /etc/php/7.3/fpm/conf.d/20-redis.ini \
     && ln -sf /etc/php/7.3/mods-available/redis.ini /etc/php/7.3/cli/conf.d/20-redis.ini \
